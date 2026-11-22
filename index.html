@@ -13,11 +13,54 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <style>
+      #vw-bar{position:fixed;inset:0 0 auto 0;height:44px;display:flex;align-items:center;justify-content:center;gap:12px;background:#1f3d2b;color:#efeada;font:600 14px "IBM Plex Sans Arabic",system-ui,sans-serif;z-index:9}
+      #vw-bar .sw{display:flex;background:#16301f;border-radius:999px;padding:3px}
+      #vw-bar button{all:unset;cursor:pointer;padding:5px 18px;border-radius:999px;color:#efeada}
+      #vw-bar button[aria-pressed=true]{background:#efeada;color:#1f3d2b}
+      #vw-stage{position:fixed;inset:44px 0 0 0;background:#d9d4c3}
+      #vw-stage.phone{display:flex;align-items:center;justify-content:center;overflow:auto}
+      #vw-stage iframe{border:0;background:#efeada;display:block}
+      #vw-stage.phone iframe{width:390px;height:844px;flex:none;border-radius:38px;border:6px solid #111;box-sizing:content-box;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+      #vw-stage.desk iframe{width:100%;height:100%}
+    </style>
     <title>مزرعة تجريبية · عرض</title>
-    <script type="module" crossorigin src="./assets/index-CCI8lcfi.js"></script>
+    <script type="module" crossorigin src="./assets/index-By2-xpjr.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-eUqDCYib.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // desktop viewer shell: slim bar «هاتف | كمبيوتر» around the same app loaded with ?bare=1 (shared localStorage)
+      (function () {
+        var q = location.search;
+        if (window.top !== window || /[?&]bare=1/.test(q) || window.innerWidth <= 900) return;
+        window.__viewerShell = true;
+        var mode = "phone";
+        try { if (localStorage.getItem("farmDemo.view") === "desk") mode = "desk"; } catch (e) {}
+        var bar = document.createElement("div"); bar.id = "vw-bar"; bar.dir = "rtl";
+        var sw = document.createElement("div"); sw.className = "sw"; bar.appendChild(sw);
+        var stage = document.createElement("div"); stage.id = "vw-stage";
+        var btns = {};
+        function show(m) {
+          mode = m;
+          try { localStorage.setItem("farmDemo.view", m); } catch (e) {}
+          stage.className = m;
+          stage.innerHTML = "";
+          var f = document.createElement("iframe"); f.title = "app";
+          f.src = location.pathname + "?bare=1";
+          stage.appendChild(f);
+          for (var k in btns) btns[k].setAttribute("aria-pressed", String(k === m));
+        }
+        [["phone", "هاتف"], ["desk", "كمبيوتر"]].forEach(function (a) {
+          var b = document.createElement("button"); b.type = "button"; b.textContent = a[1]; b.dataset.view = a[0];
+          b.onclick = function () { if (mode !== a[0]) show(a[0]); };
+          btns[a[0]] = b; sw.appendChild(b);
+        });
+        document.body.append(bar, stage);
+        document.getElementById("root").remove();
+        show(mode);
+      })();
+    </script>
   </body>
 </html>
