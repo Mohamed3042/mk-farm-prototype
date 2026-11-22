@@ -1,3 +1,4 @@
-# MK Farm prototype
+# MK Farm demo
 
-A clickable design prototype with fake sample data only. Nothing here is real farm data. Open `index.html` (phone frame) or `app.html` (the prototype itself).
+The production farm front-end running on fake data only (no server, no login). State lives in the browser (localStorage); the «إعادة العرض التجريبي» link on the first box resets it.
+The previous prototype (v7) is kept at `v7/` and tagged `demo-v7-before-real-ui`.

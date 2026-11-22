@@ -1,50 +1,24 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>نموذج المزرعة · بيانات وهمية</title>
-<style>
-  :root { --bg: #1b1f1a; --ink: #f3f1ea; --mut: #a9ab9f; --line: #3a4037; --on: #2f5d3a; }
-  * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  body { background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, "Segoe UI", Tahoma, sans-serif; display: flex; flex-direction: column; }
-  header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 10px 16px; border-bottom: 1px solid var(--line); }
-  header b { font-size: 16px; }
-  header span { color: var(--mut); font-size: 13px; }
-  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-inline-start: auto; }
-  .seg button { appearance: none; border: 0; background: transparent; color: var(--ink); font: inherit; padding: 9px 16px; min-height: 44px; cursor: pointer; }
-  .seg button[aria-pressed="true"] { background: var(--on); }
-  main { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 14px; }
-  .phone { width: 390px; height: min(844px, calc(100vh - 100px)); border: 10px solid #0c0e0b; border-radius: 38px; overflow: hidden; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
-  .wide { width: 100%; height: 100%; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
-  iframe { width: 100%; height: 100%; border: 0; display: block; }
-  @media (max-width: 640px) { header { display: none; } main { padding: 0; } .phone, .wide { width: 100%; height: 100%; border: 0; border-radius: 0; box-shadow: none; } }
-</style>
-</head>
-<body>
-<header>
-  <b>نموذج المزرعة</b>
-  <span>بيانات وهمية للتجربة · لا شيء هنا من المزرعة الحقيقية · <span id="ver"></span></span>
-  <div class="seg" role="group" aria-label="طريقة العرض">
-    <button id="bPhone" type="button" aria-pressed="true">هاتف</button>
-    <button id="bWide" type="button" aria-pressed="false">كمبيوتر</button>
-  </div>
-</header>
-<main><div id="frame" class="phone"><iframe id="app" src="app.html" title="نموذج المزرعة"></iframe></div></main>
-<script>
-  var VERSION = "v7 · 21 نوفمبر 2026";
-  document.getElementById("ver").textContent = VERSION;
-  var frame = document.getElementById("frame"), bP = document.getElementById("bPhone"), bW = document.getElementById("bWide");
-  function set(mode) {
-    frame.className = mode === "wide" ? "wide" : "phone";
-    bP.setAttribute("aria-pressed", String(mode !== "wide")); bW.setAttribute("aria-pressed", String(mode === "wide"));
-    try { localStorage.setItem("farmProtoView", mode); } catch (e) {}
-  }
-  bP.onclick = function () { set("phone"); }; bW.onclick = function () { set("wide"); };
-  var saved = null; try { saved = localStorage.getItem("farmProtoView"); } catch (e) {}
-  set(saved === "wide" ? "wide" : "phone");
-</script>
-</body>
+  <head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#efeada" />
+    <meta name="color-scheme" content="light" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="المزرعة" />
+    <meta name="description" content="دفتر المزرعة: المهام، الكشوفات، القطيع والمال" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <title>مزرعة تجريبية · عرض</title>
+    <script type="module" crossorigin src="./assets/index-BOiw0Xqn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-ChKKUVie.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
