@@ -28,8 +28,8 @@
       #vw-stage.desk iframe{width:100%;height:100%}
     </style>
     <title>مزرعة تجريبية · عرض</title>
-    <script type="module" crossorigin src="./assets/index-ByBZoC1m.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CihMIjUI.css">
+    <script type="module" crossorigin src="./assets/index-B22vEG3E.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-vlDuAqEX.css">
   </head>
   <body>
     <div id="root"></div>
@@ -51,7 +51,7 @@
           stage.className = m;
           stage.innerHTML = "";
           var f = document.createElement("iframe"); f.title = "app";
-          f.src = location.pathname + "?bare=1";
+          var md = /[?&]mode=(old|new)/.exec(q); f.src = location.pathname + "?bare=1" + (md ? "&mode=" + md[1] : "");
           stage.appendChild(f);
           for (var k in btns) btns[k].setAttribute("aria-pressed", String(k === m));
         }
@@ -64,6 +64,6 @@
         document.getElementById("root").remove();
         show(mode);
       })();
-    </script>
+    </script>
   </body>
 </html>
